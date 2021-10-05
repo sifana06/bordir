@@ -69,7 +69,7 @@ class UserSeeder extends Seeder
             'email' => 'ilyasyusuf019@gmail.com',
             'password' => bcrypt('password'),
             'phone' => '087567786734',
-            'role' => 'pengguna',
+            'role' => 'pelanggan',
             'jenis_kelamin' => 'laki-laki',
         ];
 
