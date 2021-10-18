@@ -149,6 +149,12 @@
         </div>
     </form>
 </div>
+<script>
+    const regexForPhone2 = /^[0-9]*$/;
+    const regexForPrice2 = /^[1-9][0-9]*$/;
+    const regexForPhoneWithLength2 = /^[0-9]{12,13}$/; //ganti panjang no hp disini
+    const regexname = /^[a-zA-Z ]*$/;
+</script>
 @endsection
 
 @push('header')
@@ -265,4 +271,5 @@ $(document).ready(function() {
         });
     });
 </script>
+
 @endpush

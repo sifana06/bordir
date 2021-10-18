@@ -30,14 +30,14 @@
               document.getElementById('IPhoneErr').style.display = 'block';
               document.getElementById('IPhoneErr').innerHTML = 'Nomor HP tidak boleh kurang dari 12 dan lebih dari 13';
               return false;
-          }           
+          }
           return true;
       } catch (error) {
           alert(error.message);
           console.log(error.message)
           return false;
       }
-   
+
   }
 </script>
 @section('content')
@@ -77,7 +77,8 @@
           <div class="form-group">
             <label for="inputPassword3" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
-              <input type="email" required class="form-control" name="email" placeholder="email@emai.com" value="{{$user->email}}">
+              <input type="email" id="IEmail"  required class="form-control" name="email" placeholder="email@emai.com" value="{{$user->email}}">
+                <p id="IEmailErr" style="color:red;display: none">Email Harus Valid</p>
             </div>
           </div>
           <div class="form-group">
@@ -126,4 +127,23 @@
 @endpush
 
 @push('footer')
+        <script>
+            const regexForPhone2 = /^[0-9]*$/;
+            const regexForPrice2 = /^[1-9][0-9]*$/;
+            const regexForPhoneWithLength2 = /^[0-9]{12,13}$/; //ganti panjang no hp disini
+            const regexname = /^[a-zA-Z ]*$/;
+            function validateEmail(email) {
+                const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+            $('#Inama').on( "keyup", function( event ) {
+                $(this).val(regexname.test($(this).val()) ? $(this).val():'');
+            });
+            $('#IEmail').on( "keyup", function( event ) {
+                $('#IEmailErr').css({display:validateEmail($(this).val())?'none':'block'})
+            });
+            $('#IPhone').on( "keyup", function( event ) {
+                $(this).val(regexForPhone2.test($(this).val()) ? $(this).val():'');
+            });
+        </script>
 @endpush

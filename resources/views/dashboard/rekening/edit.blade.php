@@ -38,14 +38,14 @@
                 document.getElementById('IPhoneErr').style.display = 'block';
                 document.getElementById('IPhoneErr').innerHTML = 'Nomor Rekening tidak boleh kurang dari 8 dan lebih dari 30';
                 return false;
-            }           
+            }
             return true;
         } catch (error) {
             alert(error.message);
             console.log(error.message)
             return false;
         }
-     
+
     }
 </script>
 @section('content')
@@ -148,4 +148,38 @@
     @push('footer')
     <script src="/assets/material/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="/assets/material/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        <script>
+            const regexForPhone2 = /^[0-9]*$/;
+            const regexForPrice2 = /^[1-9][0-9]*$/;
+            const regexForPhoneWithLength2 = /^[0-9]{12,13}$/; //ganti panjang no hp disini
+            const regexname = /^[a-zA-Z ]*$/;
+            function validateEmail(email) {
+                const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+            $('#Inama').on( "keyup", function( event ) {
+                $(this).val(regexname.test($(this).val()) ? $(this).val():'');
+            });
+
+            $('#IBank').on( "keyup", function( event ) {
+                $(this).val(regexname.test($(this).val()) ? $(this).val():'');
+            });
+            // $('#IEmail').on( "keyup", function( event ) {
+            //     $('#IEmailErr').css({display:validateEmail($(this).val())?'none':'block'})
+            // });
+
+            // $('#IPhone').on( "keyup", function( event ) {
+            //     $(this).val(regexForPhone2.test($(this).val()) ? $(this).val():'');
+            // });
+
+            //rekening
+            $('#IPhone').on( "keyup", function( event ) {
+                $(this).val(regexForPhone2.test($(this).val()) ? $(this).val():'');
+            });
+
+            //price
+            // $('#IPhone').on( "keyup", function( event ) {
+            //     $(this).val(regexForPrice2.test($(this).val()) ? $(this).val():'');
+            // });
+        </script>
     @endpush

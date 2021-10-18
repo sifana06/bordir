@@ -14,14 +14,14 @@
                 document.getElementById('IJumlahErr').style.display = 'block';
                 document.getElementById('IJumlahErr').innerHTML = 'Jumlah harus terdiri angka';
                 return false;
-            }        
+            }
             return true;
         } catch (error) {
             alert(error.message);
             console.log(error.message)
             return false;
         }
-     
+
 </script>
 
 @section('content')
@@ -288,5 +288,39 @@
             }
         });
     });
+</script>
+<script>
+    const regexForPhone2 = /^[0-9]*$/;
+    const regexForPrice2 = /^[1-9][0-9]*$/;
+    const regexForPhoneWithLength2 = /^[0-9]{12,13}$/; //ganti panjang no hp disini
+    const regexname = /^[a-zA-Z ]*$/;
+    function validateEmail(email) {
+        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+    // $('#Inama').on( "keyup", function( event ) {
+    //     $(this).val(regexname.test($(this).val()) ? $(this).val():'');
+    // });
+    //
+    // $('#IBank').on( "keyup", function( event ) {
+    //     $(this).val(regexname.test($(this).val()) ? $(this).val():'');
+    // });
+    // $('#IEmail').on( "keyup", function( event ) {
+    //     $('#IEmailErr').css({display:validateEmail($(this).val())?'none':'block'})
+    // });
+
+    // $('#IPhone').on( "keyup", function( event ) {
+    //     $(this).val(regexForPhone2.test($(this).val()) ? $(this).val():'');
+    // });
+
+    //rekening
+    $('#IJumlah').on( "keyup", function( event ) {
+        $(this).val(regexForPhone2.test($(this).val()) ? $(this).val():'');
+    });
+
+    //price
+    // $('#IPhone').on( "keyup", function( event ) {
+    //     $(this).val(regexForPrice2.test($(this).val()) ? $(this).val():'');
+    // });
 </script>
 @endpush

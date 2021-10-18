@@ -31,14 +31,14 @@
               document.getElementById('IPhoneErr').style.display = 'block';
               document.getElementById('IPhoneErr').innerHTML = 'Nomor HP tidak boleh kurang dari 12 dan lebih dari 13';
               return false;
-          }           
+          }
           return true;
       } catch (error) {
           alert(error.message);
           console.log(error.message)
           return false;
       }
-   
+
   }
 </script>
 @section('content')
@@ -77,7 +77,8 @@
           <div class="form-group">
             <label for="inputPassword3" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
-              <input required type="email" class="form-control" name="email" placeholder="email@emai.com">
+              <input required id="IEmail" type="email" class="form-control" name="email" placeholder="email@emai.com">
+                <p id="IEmailErr" style="color:red;display: none">Email Harus Valid</p>
             </div>
           </div>
           <div class="form-group">
@@ -124,19 +125,19 @@
     <!-- Horizontal Form -->
     @if ($message = Session::get('success'))
     <div class="alert alert-success alert-block">
-      <button type="button" class="close" data-dismiss="alert">×</button>    
+      <button type="button" class="close" data-dismiss="alert">×</button>
       <strong>{{ $message }}</strong>
     </div>
     @endif
     @if ($message = Session::get('message'))
     <div class="alert alert-warning alert-block">
-      <button type="button" class="close" data-dismiss="alert">×</button>    
+      <button type="button" class="close" data-dismiss="alert">×</button>
       <strong>{{ $message }}</strong>
     </div>
     @endif
     @if ($message = Session::get('error'))
     <div class="alert alert-danger alert-block">
-      <button type="button" class="close" data-dismiss="alert">×</button>    
+      <button type="button" class="close" data-dismiss="alert">×</button>
       <strong>{{ $message }}</strong>
     </div>
     @endif
@@ -184,7 +185,7 @@
 @push('footer')
 <script src="/assets/material/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="/assets/material/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript"> 
+<script type="text/javascript">
     //Hapus Data
     $(document).ready(function() {
       $('#konfirmasi_hapus').on('show.bs.modal', function(e) {
@@ -193,6 +194,23 @@
     });
   </script>
   <script>
+      const regexForPhone2 = /^[0-9]*$/;
+      const regexForPrice2 = /^[1-9][0-9]*$/;
+      const regexForPhoneWithLength2 = /^[0-9]{12,13}$/; //ganti panjang no hp disini
+      const regexname = /^[a-zA-Z ]*$/;
+      function validateEmail(email) {
+          const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return re.test(String(email).toLowerCase());
+      }
+      $('#Inama').on( "keyup", function( event ) {
+          $(this).val(regexname.test($(this).val()) ? $(this).val():'');
+      });
+      $('#IEmail').on( "keyup", function( event ) {
+          $('#IEmailErr').css({display:validateEmail($(this).val())?'none':'block'})
+      });
+      $('#IPhone').on( "keyup", function( event ) {
+          $(this).val(regexForPhone2.test($(this).val()) ? $(this).val():'');
+      });
     $(function() {
       $('#user-table').DataTable({
         responsive: true,
