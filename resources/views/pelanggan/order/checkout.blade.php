@@ -10,7 +10,7 @@
         try {
             document.getElementById('IJumlahErr').style.display = 'none';
             const jumlah = document.getElementById('IJumlah').value;
-            if(!regexForPrice.test(jumlah)){
+            if (!regexForPrice.test(jumlah)) {
                 document.getElementById('IJumlahErr').style.display = 'block';
                 document.getElementById('IJumlahErr').innerHTML = 'Jumlah harus terdiri angka';
                 return false;
@@ -21,7 +21,7 @@
             console.log(error.message)
             return false;
         }
-
+    }
 </script>
 
 @section('content')
